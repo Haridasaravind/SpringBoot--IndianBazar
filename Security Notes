@@ -1,0 +1,14 @@
+
+
+
+spring boot dependency we need to add this for security from maven repository:
+
+<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security -->
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		
+		
+		Default username will be : User
+		password will auto generated and it will be in the sping 

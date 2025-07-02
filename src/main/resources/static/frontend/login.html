@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - IndianBazar</title>
+  <link rel="stylesheet" href="/frontend/styles.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="left">
+      <a href="/frontend/index.html">IndianBazar</a>
+    </div>
+    <div class="right">
+      <a href="/frontend/login.html">Login</a>
+      <a href="/frontend/signup.html">SignUp</a>
+    </div>
+  </div>
+
+  <!-- Login Form -->
+  <div class="container home-content">
+    <h1>Login</h1>
+    <form id="loginForm">
+      <input type="email" id="email" placeholder="Email" required><br><br>
+      <input type="password" id="password" placeholder="Password" required><br><br>
+      <button type="submit">Login</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      fetch("http://localhost:2001/api/users/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email, password })
+      })
+      .then(response => {
+        if (!response.ok) throw new Error("Login failed");
+        return response.json();
+      })
+      .then(data => {
+        // Store dummy token temporarily
+        localStorage.setItem("token", "dummy-token");
+        alert("Login successful!");
+        window.location.href = "/frontend/index.html";
+      })
+      .catch(err => {
+        alert("Login failed: " + err.message);
+      });
+    });
+  </script>
+
+</body>
+</html>
+

@@ -1,0 +1,51 @@
+src/
+└── com.indianbazar
+    ├── model            # All POJO classes (Product, User, etc.)
+    ├── service          # Interfaces like ProductService, UserService
+    ├── service.impl     # Implementations of the service interfaces
+    ├── controller       # Menu-driven logic or console simulation (optional for now)
+    └── main             # Main entry point to run and test the app
+
+    
+
+| Class Name | Purpose                                                    |
+| ---------- | ---------------------------------------------------------- |
+| `Product`  | Defines all product-related fields (id, name, price, etc.) |
+| `User`     | Defines user fields like id, name, email, password, role   |
+
+
+| Interface Name   | Purpose                                             |
+| ---------------- | --------------------------------------------------- |
+| `ProductService` | Declares methods for product operations             |
+| `UserService`    | Declares methods for user registration, login, etc. |
+
+
+| Class Name           | Purpose                                                              |
+| -------------------- | -------------------------------------------------------------------- |
+| `ProductServiceImpl` | Implements logic to store, update, delete products using collections |
+| `UserServiceImpl`    | Implements user-related logic (register/login) using a Map or List   |
+
+
+| Class Name       | Purpose                                                                              |
+| ---------------- | ------------------------------------------------------------------------------------ |
+| `IndianBazarApp` | Entry point of the application with `main()` method to simulate product/user actions |
+
+
+
+
+1. Backend Setup
+Model Class: Product.java (with fields like id, name, description, price, imageUrl, category)
+
+Repository: ProductRepository.java
+
+Service & Impl: To fetch products by category
+
+Controller: /api/products?category=Electronics
+
+2. Database Sample Data
+Add 10 sample records per category in product_inventory_db
+
+We’ll use either data.sql or a Spring Boot initializer method to pre-populate.
+
+3. Frontend
+On clicking a category (e.g., "Electronics"), make a fetch call to /api/products?category=Electronics and render the data dynamically, including images.

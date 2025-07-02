@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SignUp - IndianBazar</title>
+  <link rel="stylesheet" href="/frontend/styles.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="left">
+      <a href="/frontend/index.html">IndianBazar</a>
+    </div>
+    <div class="right">
+      <a href="/frontend/login.html">Login</a>
+      <a href="/frontend/signup.html">SignUp</a>
+    </div>
+  </div>
+
+  <!-- Signup Form -->
+  <div class="container home-content">
+    <h1>Create Account</h1>
+    <form id="signupForm">
+      <input type="text" id="fullName" placeholder="Full Name" required><br><br>
+      <input type="email" id="email" placeholder="Email" required><br><br>
+      <input type="password" id="password" placeholder="Password" required><br><br>
+      <button type="submit">SignUp</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("signupForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const fullName = document.getElementById("fullName").value;
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      fetch("http://localhost:2001/api/users/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ fullName, email, password })
+      })
+      .then(response => {
+        if (!response.ok) throw new Error("Signup failed");
+        return response.json();
+      })
+      .then(data => {
+        alert("Signup successful!");
+        window.location.href = "/frontend/login.html";
+      })
+      .catch(err => {
+        alert("Signup failed: " + err.message);
+      });
+    });
+  </script>
+
+</body>
+</html>
+
