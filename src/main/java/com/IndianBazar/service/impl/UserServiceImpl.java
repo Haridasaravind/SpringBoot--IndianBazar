@@ -17,7 +17,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User register(User user) {
+    public User register(User user) 
+    {
         // In production, hash password
         return userRepository.save(user);
     }

@@ -4,13 +4,10 @@
   <meta charset="UTF-8">
   <title>IndianBazar - Home</title>
   <link rel="stylesheet" href="/frontend/styles.css">
-  
 </head>
 <body>
-
   <!-- Navigation -->
   <div class="navbar">
-  
     <div class="left">
       <a href="/frontend/index.html">IndianBazar</a>
     </div>
@@ -18,16 +15,12 @@
       <a href="/frontend/login.html">Login</a>
       <a href="/frontend/signup.html">SignUp</a>
     </div>
-    
-    
-    
     <div class="right" id="user-nav" style="display: none;">
       <a href="/frontend/index.html">Home</a>
       <a href="/frontend/categories.html">Categories</a>
       <a href="/frontend/cart.html">Cart</a>
       <a href="/frontend/orders.html">Orders</a>
       <a href="/frontend/MyAccont.html">My Account</a>
-      
       <button onclick="logout()">Logout</button>
     </div>
   </div>
@@ -55,6 +48,19 @@
       window.location.href = "/frontend/index.html";
     }
   </script>
+  
+  
+  <div class="wrapper">
+   <!-- Footer placeholder -->
+    <div id="footer-placeholder"></div>
 
+  <script>
+    fetch("/frontend/footer.html")
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById("footer-placeholder").innerHTML = data;
+      });
+  </script>
+  </div>
 </body>
 </html>

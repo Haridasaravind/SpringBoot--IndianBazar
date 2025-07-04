@@ -49,3 +49,81 @@ We’ll use either data.sql or a Spring Boot initializer method to pre-populate.
 
 3. Frontend
 On clicking a category (e.g., "Electronics"), make a fetch call to /api/products?category=Electronics and render the data dynamically, including images.
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - IndianBazar</title>
+  <link rel="stylesheet" href="/frontend/styles.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="left">
+      <a href="/frontend/index.html">IndianBazar</a>
+    </div>
+    <div class="right">
+      <a href="/frontend/login.html">Login</a>
+      <a href="/frontend/signup.html">SignUp</a>
+    </div>
+  </div>
+
+  <!-- Login Form -->
+  <div class="container">
+    <h2>Login</h2>
+    <form id="loginForm" novalidate>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" required>
+        <div id="emailError" class="error-message"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" required>
+        <div id="passwordError" class="error-message"></div>
+      </div>
+
+      <button type="submit">Login</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const email = document.getElementById("email");
+      const password = document.getElementById("password");
+
+      const emailError = document.getElementById("emailError");
+      const passwordError = document.getElementById("passwordError");
+
+      emailError.textContent = "";
+      passwordError.textContent = "";
+
+      let valid = true;
+
+      const emailPattern = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+      if (!emailPattern.test(email.value.trim())) {
+        emailError.textContent = "Please enter a valid email address.";
+        valid = false;
+      }
+
+      if (password.value.trim().length < 6) {
+        passwordError.textContent = "Password must be at least 6 characters.";
+        valid = false;
+      }
+
+      if (valid) {
+        alert("✅ Login successful (frontend validation passed)");
+        // Simulate redirect or further logic
+        // window.location.href = "/frontend/index.html";
+      }
+    });
+  </script>
+
+</body>
+</html>

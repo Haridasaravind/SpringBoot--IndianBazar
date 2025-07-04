@@ -60,15 +60,6 @@
 		</dependency>
 		
 		<dependency>
-    		<groupId>org.projectlombok</groupId>
-   			 <artifactId>lombok</artifactId>
-   			 <scope>provided</scope>
-		</dependency>
-		
-		
-		
-		
-		<dependency>
 			<groupId>com.mysql</groupId>
 			<artifactId>mysql-connector-j</artifactId>
 			<scope>runtime</scope>
@@ -80,10 +71,17 @@
 			<scope>test</scope>
 		</dependency>
 		
-		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security -->
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security 
 		<dependency>
 		    <groupId>org.springframework.boot</groupId>
 		    <artifactId>spring-boot-starter-security</artifactId>
+		</dependency>-->
+		
+		<!-- lombok for all the reduction of boiler plate code like getters/setters/constructors....etc -->
+		<dependency>
+		  <groupId>org.projectlombok</groupId>
+		  <artifactId>lombok</artifactId>
+		  <scope>provided</scope>
 		</dependency>
 		
 	</dependencies>

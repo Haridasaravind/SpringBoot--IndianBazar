@@ -1,7 +1,9 @@
 package com.IndianBazar.controller;
-
 import com.IndianBazar.model.User;
 import com.IndianBazar.service.UserService;
+
+import jakarta.validation.Valid;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,18 +13,20 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final UserService userService;
-
     public UserController(UserService userService) 
     {
         this.userService = userService;
     }
 
+    
+    // service for signup
     @PostMapping("/signup")
-    public ResponseEntity<User> register(@RequestBody User user) 
-    {
-        User saved = userService.register(user);
-        return ResponseEntity.ok(saved);
-    }
+    public ResponseEntity<?> register(@Valid @RequestBody User user) 
+		    {
+		        userService.register(user);
+		        return ResponseEntity.ok("User registered successfully");
+		    }
+
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody User loginReq) 

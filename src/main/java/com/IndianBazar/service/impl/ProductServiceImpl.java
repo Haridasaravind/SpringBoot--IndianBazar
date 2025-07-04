@@ -1,5 +1,4 @@
 package com.IndianBazar.service.impl;
-
 import com.IndianBazar.model.Product;
 import com.IndianBazar.repository.ProductRepository;
 import com.IndianBazar.service.ProductService;
@@ -36,4 +35,29 @@ public class ProductServiceImpl implements ProductService {
 	public void saveAll(List<Product> products) {
 		 productRepository.saveAll(products);
 	}
+
+	
+	public Product updateProduct(Long id, Product updatedProduct)
+	{
+		Product existingProduct = productRepository.findById(id)
+		        .orElseThrow(() -> new RuntimeException("Product not found"));
+		// Update fields
+	    existingProduct.setName(updatedProduct.getName());
+	    existingProduct.setDescription(updatedProduct.getDescription());
+	    existingProduct.setPrice(updatedProduct.getPrice());
+	    existingProduct.setQuantity(updatedProduct.getQuantity());
+	    existingProduct.setCategory(updatedProduct.getCategory());
+	    existingProduct.setImageUrl(updatedProduct.getImageUrl());
+	    existingProduct.setIsFeatured(updatedProduct.getIsFeatured());
+
+	    return productRepository.save(existingProduct);
+	}
+
+	public void deleteProduct(Long id) 
+	{
+	  Product product = productRepository.findById(id).orElseThrow(() -> new RuntimeException("Product with ID " + id + " not found"));
+	  productRepository.delete(product);
+	}
+
+	
 }

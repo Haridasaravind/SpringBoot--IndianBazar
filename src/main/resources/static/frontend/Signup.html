@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>SignUp - IndianBazar</title>
-  <link rel="stylesheet" href="/frontend/styles.css">
+  <meta charset="UTF-8" />
+  <title>Signup - IndianBazar</title>
+  <link rel="stylesheet" href="/frontend/styles.css" />
 </head>
 <body>
-
   <!-- Navbar -->
   <div class="navbar">
     <div class="left">
@@ -18,46 +17,109 @@
     </div>
   </div>
 
-  <!-- Signup Form -->
-  <div class="container home-content">
-    <h1>Create Account</h1>
+  <div class="container">
+    <h2>Create Account</h2>
     <form id="signupForm">
-      <input type="text" id="fullName" placeholder="Full Name" required><br><br>
-      <input type="email" id="email" placeholder="Email" required><br><br>
-      <input type="password" id="password" placeholder="Password" required><br><br>
-      <button type="submit">SignUp</button>
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input type="text" id="firstName" name="firstName" />
+        <div id="firstNameError" class="error-message">First name must be at least 2 letters</div>
+      </div>
+
+      <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input type="text" id="lastName" name="lastName" />
+        <div id="lastNameError" class="error-message">Last name must be at least 2 letters</div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" />
+        <div id="emailError" class="error-message">Please enter a valid email</div>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="text" id="phone" name="phone" />
+        <div id="phoneError" class="error-message">Phone must be 10 digits</div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" />
+        <div id="passwordError" class="error-message">Password must be at least 6 characters</div>
+      </div>
+
+      <button type="submit">Sign Up</button>
     </form>
   </div>
 
   <script>
     document.getElementById("signupForm").addEventListener("submit", function (e) {
       e.preventDefault();
+      let isValid = true;
 
-      const fullName = document.getElementById("fullName").value;
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
+      const firstName = document.getElementById("firstName");
+      const lastName = document.getElementById("lastName");
+      const email = document.getElementById("email");
+      const phone = document.getElementById("phone");
+      const password = document.getElementById("password");
 
-      fetch("http://localhost:2001/api/users/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ fullName, email, password })
-      })
-      .then(response => {
-        if (!response.ok) throw new Error("Signup failed");
-        return response.json();
-      })
-      .then(data => {
-        alert("Signup successful!");
-        window.location.href = "/frontend/login.html";
-      })
-      .catch(err => {
-        alert("Signup failed: " + err.message);
-      });
+      resetErrors();
+
+      if (!/^[A-Za-z]{2,}$/.test(firstName.value.trim())) {
+        showError("firstName");
+        isValid = false;
+      }
+
+      if (!/^[A-Za-z]{2,}$/.test(lastName.value.trim())) {
+        showError("lastName");
+        isValid = false;
+      }
+
+      if (!/^\S+@\S+\.\S+$/.test(email.value.trim())) {
+        showError("email");
+        isValid = false;
+      }
+
+      if (!/^\d{10}$/.test(phone.value.trim())) {
+        showError("phone");
+        isValid = false;
+      }
+
+      if (!/^.{6,}$/.test(password.value.trim())) {
+        showError("password");
+        isValid = false;
+      }
+
+      if (isValid) {
+        alert("✅ All fields are valid! Form submitted successfully.");
+        // document.getElementById("signupForm").reset(); // optional
+      }
     });
-  </script>
 
+    function showError(field) {
+      document.getElementById(field).classList.add("invalid");
+      document.getElementById(field + "Error").style.display = "block";
+    }
+
+    function resetErrors() {
+      ["firstName", "lastName", "email", "phone", "password"].forEach(field => {
+        document.getElementById(field).classList.remove("invalid");
+        document.getElementById(field + "Error").style.display = "none";
+      });
+    }
+  </script>
+  
+<!-- Footer placeholder -->
+    <div id="footer-placeholder"></div>
+
+  <script>
+    fetch("/frontend/footer.html")
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById("footer-placeholder").innerHTML = data;
+      });
+  </script>
 </body>
 </html>
-

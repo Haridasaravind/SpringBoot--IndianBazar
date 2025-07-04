@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>My Account - IndianBazar</title>
+  <link rel="stylesheet" href="/frontend/styles.css" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="left">
+      <a href="/frontend/index.html">IndianBazar</a>
+    </div>
+    <div class="right">
+      <a href="/frontend/index.html">Home</a>
+      <a href="/frontend/categories.html">Categories</a>
+      <a href="/frontend/cart.html">Cart</a>
+      <a href="/frontend/orders.html">Orders</a>
+      <a href="/frontend/MyAccount.html">My Account</a>
+      <button onclick="logout()">Logout</button>
+    </div>
+  </div>
+
+  <!-- My Account Content -->
+  <div class="container">
+    <h2>My Account</h2>
+    <div id="accountInfo">
+      <p><strong>First Name:</strong> <span id="firstName"></span></p>
+      <p><strong>Last Name:</strong> <span id="lastName"></span></p>
+      <p><strong>Email:</strong> <span id="email"></span></p>
+      <p><strong>Phone:</strong> <span id="phone"></span></p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-section">
+        <h4>IndianBazar</h4>
+        <p>Your one-stop destination for electronics, fashion, groceries, and more.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Customer Service</h4>
+        <ul>
+          <li><a href="#">Help & FAQs</a></li>
+          <li><a href="#">Returns & Refunds</a></li>
+          <li><a href="#">Shipping Info</a></li>
+          <li><a href="#">Track Order</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>About Us</h4>
+        <ul>
+          <li><a href="#">Our Story</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Follow Us</h4>
+        <ul>
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">Twitter</a></li>
+          <li><a href="#">YouTube</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 IndianBazar. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Script for Loading User Info -->
+  <script>
+    // Example dummy user info (you can store user info in localStorage after login/signup)
+    const user = JSON.parse(localStorage.getItem("userInfo")) || {
+      firstName: "Guest",
+      lastName: "",
+      email: "Not logged in",
+      phone: ""
+    };
+
+    document.getElementById("firstName").textContent = user.firstName;
+    document.getElementById("lastName").textContent = user.lastName;
+    document.getElementById("email").textContent = user.email;
+    document.getElementById("phone").textContent = user.phone;
+
+    function logout() {
+      localStorage.removeItem("token");
+      localStorage.removeItem("userInfo");
+      window.location.href = "/frontend/index.html";
+    }
+  </script>
+
+</body>
+</html>

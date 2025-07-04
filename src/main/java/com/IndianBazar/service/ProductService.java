@@ -12,5 +12,9 @@ import java.util.List;
 	    Product saveProduct(Product product);
 	    
 	    void saveAll(List<Product> products);
+
+		Product updateProduct(Long id, Product updatedProduct);
+
+		void deleteProduct(Long id);
 	    
 	}

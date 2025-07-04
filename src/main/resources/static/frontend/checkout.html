@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Checkout - IndianBazar</title>
+  <link rel="stylesheet" href="/frontend/styles.css" />
+  <style>
+    .checkout-container {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+
+    .summary-section, .form-section {
+      margin-bottom: 30px;
+    }
+
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .place-order-btn {
+      background-color: #1976d2;
+      color: white;
+      padding: 10px 20px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .place-order-btn:hover {
+      background-color: #0d47a1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="left">
+      <a href="/frontend/index.html">IndianBazar</a>
+    </div>
+    <div class="right">
+      <a href="/frontend/categories.html">Categories</a>
+      <a href="/frontend/cart.html">Cart</a>
+      <a href="/frontend/orders.html">Orders</a>
+      <a href="/frontend/MyAccount.html">My Account</a>
+      <button onclick="logout()">Logout</button>
+    </div>
+  </div>
+
+  <!-- Checkout Container -->
+  <div class="container checkout-container">
+    <h2>Checkout</h2>
+
+    <!-- Cart Summary -->
+    <div class="summary-section">
+      <h3>Order Summary</h3>
+      <div id="orderSummary"></div>
+      <p><strong>Total: $<span id="orderTotal">0.00</span></strong></p>
+    </div>
+
+    <!-- Shipping Information -->
+    <div class="form-section">
+      <h3>Shipping Information</h3>
+      <form id="checkoutForm">
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" required />
+        </div>
+        <div class="form-group">
+          <label for="address">Address</label>
+          <input type="text" id="address" required />
+        </div>
+        <div class="form-group">
+          <label for="city">City</label>
+          <input type="text" id="city" required />
+        </div>
+        <div class="form-group">
+          <label for="postalCode">Postal Code</label>
+          <input type="text" id="postalCode" required />
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone</label>
+          <input type="tel" id="phone" required />
+        </div>
+
+        <button type="submit" class="place-order-btn">Place Order</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Load cart from localStorage
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const orderSummary = document.getElementById("orderSummary");
+    const orderTotal = document.getElementById("orderTotal");
+
+    let total = 0;
+    cart.forEach(item => {
+      const subtotal = item.price * item.quantity;
+      total += subtotal;
+
+      const itemDiv = document.createElement("div");
+      itemDiv.className = "summary-item";
+      itemDiv.innerHTML = `<span>${item.name} x ${item.quantity}</span><span>$${subtotal.toFixed(2)}</span>`;
+      orderSummary.appendChild(itemDiv);
+    });
+
+    orderTotal.textContent = total.toFixed(2);
+
+    // Place order handler
+    document.getElementById("checkoutForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      alert("✅ Order placed successfully!\nThank you for shopping with IndianBazar.");
+      localStorage.removeItem("cart");
+      window.location.href = "/frontend/index.html";
+    });
+
+    // Logout
+    function logout() {
+      localStorage.removeItem("token");
+      window.location.href = "/frontend/index.html";
+    }
+  </script>
+</body>
+</html>

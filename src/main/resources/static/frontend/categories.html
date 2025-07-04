@@ -26,6 +26,12 @@
     .category-card:hover {
       background-color: #bbdefb;
     }
+
+    .category-card a {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
   </style>
 </head>
 <body>
@@ -38,9 +44,9 @@
     <div class="right">
       <a href="/frontend/index.html">Home</a>
       <a href="/frontend/categories.html">Categories</a>
-      <a href="#">Cart</a>
-      <a href="#">Orders</a>
-      <a href="#">My Account</a>
+      <a href="/frontend/cart.html">Cart</a>
+      <a href="/frontend/orders.html">Orders</a>
+      <a href="/frontend/myaccount.html">My Account</a>
       <button onclick="logout()">Logout</button>
     </div>
   </div>
@@ -51,29 +57,51 @@
     <div id="categoryList" class="category-grid"></div>
   </div>
 
+  <!-- JavaScript -->
   <script>
+    // Redirect to login if not authenticated
     if (!localStorage.getItem("token")) {
       alert("Please login to view categories.");
       window.location.href = "/frontend/login.html";
     }
 
-    const categories = ["Electronics", "Fashion", "Grocery", "Home and Kitchen", "Books", "Toys"];
+    const categories = [
+      { name: "Electronics", link: "electronics.html" },
+      { name: "Fashion", link: "fashion.html" },
+      { name: "Grocery", link: "grocery.html" },
+      { name: "Home & Kitchen", link: "home-kitchen.html" },
+      { name: "Books", link: "books.html" },
+      { name: "Toys", link: "toys.html" }
+    ];
+
     const categoryList = document.getElementById("categoryList");
 
     categories.forEach(cat => {
+      const anchor = document.createElement("a");
+      anchor.href = cat.link;
+
       const div = document.createElement("div");
       div.className = "category-card";
-      div.textContent = cat;
-      div.onclick = () => {
-        window.location.href = `/frontend/category-products.html?category=${encodeURIComponent(cat)}`;
-      };
-      categoryList.appendChild(div);
+      div.textContent = cat.name;
+
+      anchor.appendChild(div);
+      categoryList.appendChild(anchor);
     });
 
     function logout() {
       localStorage.removeItem("token");
       window.location.href = "/frontend/index.html";
     }
+  </script>
+
+  <!-- Footer -->
+  <div id="footer-placeholder"></div>
+  <script>
+    fetch("/frontend/footer.html")
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById("footer-placeholder").innerHTML = data;
+      });
   </script>
 
 </body>

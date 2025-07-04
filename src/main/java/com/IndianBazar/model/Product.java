@@ -1,5 +1,4 @@
 package com.IndianBazar.model;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -8,13 +7,20 @@ import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 
 @Entity
-public class Product {
-
-   	    @Id
-	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	    private Long id;
+@Data                   // Generates getters, setters, toString, equals, and hashCode
+@NoArgsConstructor      // Generates default constructor
+@AllArgsConstructor     // Generates full-args constructor
+public class Product 
+{
+   	@Id
+   	@GeneratedValue(strategy = GenerationType.IDENTITY)
+   	private Long id;
 
 	    @NotBlank(message = "Product Name is mandatory")
 	    private String name;
@@ -38,86 +44,86 @@ public class Product {
 
 	    @NotNull(message = "Featured flag is mandatory")
 	    private Boolean isFeatured;
-    
-  
-    
-    
- // ✅ Default constructor (MANDATORY for JPA)
-    public Product() {
-    }
 
-    // ✅ Full-args constructor (Optional but helpful)
-    public Product(Long id, String name, String description, Double price, Integer quantity,
-                   String category, String imageUrl, Boolean isFeatured) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.quantity = quantity;
-        this.category = category;
-        this.imageUrl = imageUrl;
-        this.isFeatured = isFeatured;
-    }
+		public Long getId() {
+			return id;
+		}
 
-	public Long getId() {
-		return id;
-	}
+		public void setId(Long id) {
+			this.id = id;
+		}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+		public String getName() {
+			return name;
+		}
 
-	public String getName() {
-		return name;
-	}
+		public void setName(String name) {
+			this.name = name;
+		}
 
-	public void setName(String name) {
-		this.name = name;
-	}
+		public String getDescription() {
+			return description;
+		}
 
-	public String getDescription() {
-		return description;
-	}
+		public void setDescription(String description) {
+			this.description = description;
+		}
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+		public Double getPrice() {
+			return price;
+		}
 
-	public double getPrice() {
-		return price;
-	}
+		public void setPrice(Double price) {
+			this.price = price;
+		}
 
-	public void setPrice(double price) {
-		this.price = price;
-	}
+		public Integer getQuantity() {
+			return quantity;
+		}
 
-	public Integer getQuantity() {
-		return quantity;
-	}
+		public void setQuantity(Integer quantity) {
+			this.quantity = quantity;
+		}
 
-	public void setQuantity(Integer quantity) {
-		this.quantity = quantity;
-	}
+		public String getCategory() {
+			return category;
+		}
 
-	public String getImageUrl() {
-		return imageUrl;
-	}
+		public void setCategory(String category) {
+			this.category = category;
+		}
 
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
-	}
+		public String getImageUrl() {
+			return imageUrl;
+		}
 
-	public String getCategory() {
-		return category;
-	}
+		public void setImageUrl(String imageUrl) {
+			this.imageUrl = imageUrl;
+		}
 
-	public void setCategory(String category) {
-		this.category = category;
-	}
-    
-    // ✅ Getters and Setters (You can generate using IDE)
-    
-    
-    
-    
+		public Boolean getIsFeatured() {
+			return isFeatured;
+		}
+
+		public void setIsFeatured(Boolean isFeatured) {
+			this.isFeatured = isFeatured;
+		}
+
+		@Override
+		public String toString() {
+			return "Product []";
+		}
+
+		public Product() {
+			super();
+		}
+	    
+	    
+	    
+	    
+	    
+	    
 }
+
+
+

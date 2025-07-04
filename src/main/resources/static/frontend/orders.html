@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Your Orders - IndianBazar</title>
+  <link rel="stylesheet" href="/frontend/styles.css" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="left">
+      <a href="/frontend/index.html">IndianBazar</a>
+    </div>
+    <div class="right">
+      <a href="/frontend/index.html">Home</a>
+      <a href="/frontend/categories.html">Categories</a>
+      <a href="/frontend/cart.html">Cart</a>
+      <a href="/frontend/orders.html">Orders</a>
+      <a href="/frontend/MyAccount.html">My Account</a>
+      <button onclick="logout()">Logout</button>
+    </div>
+  </div>
+
+  <!-- Orders Content -->
+  <div class="container">
+    <h2>Your Orders</h2>
+    <div id="ordersList">
+      <!-- Orders will be rendered here -->
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-section">
+        <h4>IndianBazar</h4>
+        <p>Your one-stop destination for electronics, fashion, groceries, and more.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Customer Service</h4>
+        <ul>
+          <li><a href="#">Help & FAQs</a></li>
+          <li><a href="#">Returns & Refunds</a></li>
+          <li><a href="#">Shipping Info</a></li>
+          <li><a href="#">Track Order</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>About Us</h4>
+        <ul>
+          <li><a href="#">Our Story</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Follow Us</h4>
+        <ul>
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">Twitter</a></li>
+          <li><a href="#">YouTube</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 IndianBazar. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Script to load orders -->
+  <script>
+    const orders = JSON.parse(localStorage.getItem("orders")) || [];
+    const ordersList = document.getElementById("ordersList");
+
+    function renderOrders() {
+      if (orders.length === 0) {
+        ordersList.innerHTML = "<p>You have no orders yet.</p>";
+        return;
+      }
+
+      orders.forEach((order, index) => {
+        const orderDiv = document.createElement("div");
+        orderDiv.classList.add("order-block");
+        orderDiv.innerHTML = `
+          <h3>Order #${index + 1}</h3>
+          <ul>
+            ${order.items.map(item => `
+              <li>
+                ${item.name} - Quantity: ${item.quantity} - Price: $${item.price}
+              </li>`).join("")}
+          </ul>
+          <p><strong>Total:</strong> $${order.total}</p>
+          <hr/>
+        `;
+        ordersList.appendChild(orderDiv);
+      });
+    }
+
+    function logout() {
+      localStorage.removeItem("token");
+      window.location.href = "/frontend/index.html";
+    }
+
+    renderOrders();
+  </script>
+
+</body>
+</html>
